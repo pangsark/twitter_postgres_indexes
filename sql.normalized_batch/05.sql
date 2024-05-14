@@ -10,12 +10,9 @@ FROM (
         tag
     FROM tweets
     JOIN tweet_tags USING (id_tweets)
-    WHERE to_tsvector('english',text)@@to_tsquery('english','coronavirus')
-      AND lang='en'
-) t
+    WHERE to_tsvector('english',text)@@to_tsquery('english','coronavirus') and lang='en'
+) AS t
 GROUP BY tag
-ORDER BY count DESC,tag
-LIMIT 1000
-;
-
+ORdER BY count desc,tag
+LIMIT 1000;
 
